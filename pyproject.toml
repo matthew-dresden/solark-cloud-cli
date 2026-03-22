@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "solark-cloud-cli"
+version = "0.1.0"
+description = "CLI tool for interacting with the SolArk Cloud API"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+dependencies = [
+    "typer>=0.15",
+    "httpx>=0.28",
+    "pydantic>=2.10",
+    "pydantic-settings>=2.7",
+    "rich>=14",
+]
+
+[project.scripts]
+solark = "solark_cloud_cli.main:app"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=6",
+    "respx>=0.22",
+    "ruff>=0.11",
+    "pytest-env>=1.1",
+]
+
+[tool.ruff]
+target-version = "py312"
+src = ["src"]
+line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src/solark_cloud_cli"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true

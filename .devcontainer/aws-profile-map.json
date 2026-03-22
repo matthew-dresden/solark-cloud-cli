@@ -1,0 +1,10 @@
+{
+  "default": {
+    "region": "us-east-1",
+    "sso_start_url": "https://dresdencraft.awsapps.com/start",
+    "sso_region": "us-east-1",
+    "account_name": "dresdencraft-root",
+    "account_id": "239123375470",
+    "role_name": "AdministratorAccess"
+  }
+}

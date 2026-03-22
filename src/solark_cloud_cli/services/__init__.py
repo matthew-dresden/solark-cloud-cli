@@ -1,0 +1,1 @@
+from solark_cloud_cli.services.energy_service import EnergyService as EnergyService
