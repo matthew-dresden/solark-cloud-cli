@@ -1,1 +1,2 @@
 from solark_cloud_cli.services.energy_service import EnergyService as EnergyService
+from solark_cloud_cli.services.valuation_service import ValuationService as ValuationService

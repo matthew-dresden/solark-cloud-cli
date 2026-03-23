@@ -6,6 +6,7 @@ from solark_cloud_cli.client.http_client import SolarkClient
 from solark_cloud_cli.config import SolarkConfig
 from solark_cloud_cli.formatters import get_formatter
 from solark_cloud_cli.services.energy_service import EnergyService
+from solark_cloud_cli.services.valuation_service import ValuationService
 
 energy_app = typer.Typer(
     name="energy",
@@ -16,6 +17,7 @@ energy_app = typer.Typer(
 _PERIOD_TO_METHOD = {
     "yearly": "get_yearly_energy",
     "monthly": "get_monthly_energy",
+    "month_summary": "get_month_summary",
     "daily": "get_daily_energy",
 }
 
@@ -53,6 +55,7 @@ def _run_energy_command(
     password: str | None,
     plant_id: str | None,
     output_format: str | None,
+    show_value: bool,
 ) -> None:
     try:
         config = _build_config(username, password, plant_id, output_format)
@@ -78,6 +81,14 @@ def _run_energy_command(
     except Exception as e:
         typer.echo(f"Error: {e}", err=True)
         raise typer.Exit(code=1) from e
+
+    if show_value:
+        try:
+            valuation = ValuationService(config)
+            report = valuation.add_valuations(report)
+        except ValueError as e:
+            typer.echo(f"Error: {e}", err=True)
+            raise typer.Exit(code=1) from e
 
     output = formatter.format(report)
     typer.echo(output)
@@ -123,6 +134,14 @@ OutputFormatOption = Annotated[
         show_envvar=False,
     ),
 ]
+ShowValueOption = Annotated[
+    bool,
+    typer.Option(
+        "--show-value",
+        "-V",
+        help="Show dollar value columns (requires rate config in .env or env vars).",
+    ),
+]
 
 
 @energy_app.command()
@@ -132,9 +151,10 @@ def year(
     output_format: OutputFormatOption = None,
     username: UsernameOption = None,
     password: PasswordOption = None,
+    show_value: ShowValueOption = False,
 ) -> None:
     """Retrieve monthly energy breakdown for an entire year."""
-    _run_energy_command("yearly", date, username, password, plant_id, output_format)
+    _run_energy_command("yearly", date, username, password, plant_id, output_format, show_value)
 
 
 @energy_app.command()
@@ -144,9 +164,22 @@ def month(
     output_format: OutputFormatOption = None,
     username: UsernameOption = None,
     password: PasswordOption = None,
+    show_value: ShowValueOption = False,
+    summary: Annotated[
+        bool,
+        typer.Option(
+            "--summary",
+            "-s",
+            help="Show single-row monthly aggregate instead of daily breakdown.",
+        ),
+    ] = False,
 ) -> None:
-    """Retrieve daily energy breakdown for a specific month."""
-    _run_energy_command("monthly", date, username, password, plant_id, output_format)
+    """Retrieve energy data for a specific month.
+
+    By default shows daily breakdown. Use --summary / -s for a single-row aggregate.
+    """
+    period = "month_summary" if summary else "monthly"
+    _run_energy_command(period, date, username, password, plant_id, output_format, show_value)
 
 
 @energy_app.command()
@@ -156,6 +189,7 @@ def day(
     output_format: OutputFormatOption = None,
     username: UsernameOption = None,
     password: PasswordOption = None,
+    show_value: ShowValueOption = False,
 ) -> None:
     """Retrieve 5-minute interval energy data for a specific day."""
-    _run_energy_command("daily", date, username, password, plant_id, output_format)
+    _run_energy_command("daily", date, username, password, plant_id, output_format, show_value)

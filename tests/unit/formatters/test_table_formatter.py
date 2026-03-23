@@ -24,3 +24,33 @@ class TestTableFormatter:
         formatter = TableFormatter()
         output = formatter.format(report)
         assert "test-plant-99" in output
+
+    def test_table_shows_value_columns_when_valuations_present(self):
+        from solark_cloud_cli.models.energy import ValuationRow
+
+        report = make_energy_report(labels=["Load", "PV", "Export", "Import"], records_per_label=2)
+        valuations = [
+            ValuationRow(
+                timestamp=f"2024-{i + 1:02d}",
+                self_consumed_kwh=100.0,
+                avoided_cost=22.74,
+                export_credit=9.90,
+                total_value=32.64,
+            )
+            for i in range(2)
+        ]
+        report = report.model_copy(update={"valuations": valuations})
+        formatter = TableFormatter()
+        output = formatter.format(report)
+        assert "Self-Used" in output
+        assert "Avoided $" in output
+        assert "Export $" in output
+        assert "Value $" in output
+        assert "TOTAL" in output
+
+    def test_table_no_value_columns_without_valuations(self):
+        report = make_energy_report()
+        formatter = TableFormatter()
+        output = formatter.format(report)
+        assert "Avoided $" not in output
+        assert "TOTAL" not in output

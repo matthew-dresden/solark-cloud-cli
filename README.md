@@ -1,6 +1,6 @@
 # solark-cloud-cli
 
-> **⚠️ WARNING: This project is currently in testing. The `main` branch is not considered stable. Only tagged releases (e.g. `0.1.1`) are intended for use. Expect breaking changes until a stable release is published.**
+> **⚠️ WARNING: This project is currently in testing. The `main` branch is not considered stable. Only tagged releases (e.g. `0.2.0`) are intended for use. Expect breaking changes until a stable release is published.**
 
 CLI tool for retrieving solar energy production data from [Sol-Ark](https://sol-ark.com/) inverter systems via the SolarkCloud API.
 
@@ -21,7 +21,7 @@ Requires Python 3.12+.
 ### With pipx (recommended)
 
 ```bash
-pipx install git+https://github.com/matthew-dresden/solark-cloud-cli.git@0.1.1
+pipx install git+https://github.com/matthew-dresden/solark-cloud-cli.git@0.2.0
 ```
 
 ### From source
@@ -176,6 +176,9 @@ solark energy year --date 2025
 # Monthly data (daily breakdown)
 solark energy month --date 2025-04
 
+# Monthly aggregate (single-row summary for one month)
+solark energy month --date 2025-07 --summary
+
 # Daily data (5-minute intervals, values in watts)
 solark energy day --date 2025-04-15
 ```
@@ -188,11 +191,14 @@ Add `--show-value` / `-V` to see dollar value columns (requires rate configurati
 # Year with values — shows Self-Used, Avoided $, Export $, Value $ columns
 solark energy year --date 2025 --show-value
 
-# Month with values
+# Single month summary with values
+solark energy month --date 2025-07 --summary --show-value
+
+# Month daily breakdown with values
 solark energy month --date 2025-07 --show-value
 ```
 
-Value calculations are available for `year` and `month` commands where data is in kWh. The `day` command returns data in watts and does not support value calculations.
+Value calculations are available for `year` and `month` (including `--summary`) commands where data is in kWh. The `day` command returns data in watts and does not support value calculations.
 
 ### Output Formats
 

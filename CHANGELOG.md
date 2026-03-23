@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2026-03-23
+
+### Added
+- `solark energy month --summary` / `-s` flag — shows a single-row monthly aggregate instead of daily breakdown, fetched from the year endpoint and filtered to the requested month
+- Combines with `--show-value` for a quick monthly value summary
+
 ## [0.1.1] - 2026-03-23
 
 ### Changed

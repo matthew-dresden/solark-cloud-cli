@@ -8,9 +8,18 @@ class EnergyRecord(BaseModel):
     label: str
 
 
+class ValuationRow(BaseModel):
+    timestamp: str
+    self_consumed_kwh: float
+    avoided_cost: float
+    export_credit: float
+    total_value: float
+
+
 class EnergyReport(BaseModel):
     plant_id: str
-    period: str  # "year", "month", "day", "flow"
+    period: str
     date: str
     records: list[EnergyRecord]
-    labels: list[str]  # unique labels in this report
+    labels: list[str]
+    valuations: list[ValuationRow] | None = None

@@ -1,8 +1,11 @@
+import logging
 from typing import Protocol
 
 import httpx
 
 from solark_cloud_cli.models.auth import TokenData, TokenResponse
+
+logger = logging.getLogger(__name__)
 
 
 class Authenticator(Protocol):
@@ -21,6 +24,8 @@ class SolarkAuthenticator:
 
     def authenticate(self) -> TokenData:
         url = f"{self._api_url}/oauth/token"
+        logger.info("Authenticating with SolarkCloud API")
+        logger.debug("Auth request to %s", url)
         payload = {
             "client_id": self._CLIENT_ID,
             "grant_type": self._GRANT_TYPE,
@@ -42,4 +47,5 @@ class SolarkAuthenticator:
         if not token_response.success:
             msg = f"Authentication failed: {token_response.msg}"
             raise RuntimeError(msg)
+        logger.info("Authentication successful")
         return token_response.data

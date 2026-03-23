@@ -26,3 +26,26 @@ class TestCsvFormatter:
         output = formatter.format(report)
         assert "PV" in output
         assert "kWh" in output
+
+    def test_csv_pivoted_with_valuations(self):
+        from solark_cloud_cli.models.energy import ValuationRow
+
+        report = make_energy_report(labels=["Load", "PV", "Export", "Import"], records_per_label=2)
+        valuations = [
+            ValuationRow(
+                timestamp=f"2024-{i + 1:02d}",
+                self_consumed_kwh=100.0,
+                avoided_cost=22.74,
+                export_credit=9.90,
+                total_value=32.64,
+            )
+            for i in range(2)
+        ]
+        report = report.model_copy(update={"valuations": valuations})
+        formatter = CsvFormatter()
+        output = formatter.format(report)
+        lines = output.strip().split("\n")
+        assert "self_consumed_kwh" in lines[0]
+        assert "avoided_cost" in lines[0]
+        assert "total_value" in lines[0]
+        assert len(lines) == 3  # header + 2 data rows

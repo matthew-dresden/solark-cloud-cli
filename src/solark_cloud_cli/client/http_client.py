@@ -1,3 +1,5 @@
+import logging
+
 import httpx
 
 from solark_cloud_cli.client.auth import SolarkAuthenticator
@@ -5,6 +7,8 @@ from solark_cloud_cli.client.endpoints import EndpointBuilder
 from solark_cloud_cli.config import SolarkConfig
 from solark_cloud_cli.models.api_responses import ApiResponse
 from solark_cloud_cli.models.auth import TokenData
+
+logger = logging.getLogger(__name__)
 
 
 class SolarkClient:
@@ -27,6 +31,7 @@ class SolarkClient:
         self._http_client: httpx.Client | None = None
 
     def __enter__(self) -> "SolarkClient":
+        logger.debug("Creating HTTP client with timeout=%d", self._config.timeout)
         self._http_client = httpx.Client(timeout=self._config.timeout)
         return self
 
@@ -44,6 +49,7 @@ class SolarkClient:
         if self._http_client is None:
             msg = "SolarkClient must be used as a context manager"
             raise RuntimeError(msg)
+        logger.debug("GET %s", url)
         token = self._ensure_authenticated()
         response = self._http_client.get(
             url,
@@ -54,19 +60,26 @@ class SolarkClient:
         )
         response.raise_for_status()
         api_response = ApiResponse.model_validate(response.json())
+        logger.debug("Response: code=%d, success=%s", api_response.code, api_response.success)
         if not api_response.success:
             msg = f"API request failed: {api_response.msg}"
             raise RuntimeError(msg)
         return api_response
 
+    def _log_energy_fetch(self, period: str, plant_id: str, date: str) -> None:
+        logger.info("Fetching %s energy data for plant %s, date %s", period, plant_id, date)
+
     def get_energy_year(self, plant_id: str, date: str) -> ApiResponse:
+        self._log_energy_fetch("year", plant_id, date)
         url = self._endpoints.energy_year_url(plant_id, date)
         return self._get(url)
 
     def get_energy_month(self, plant_id: str, date: str) -> ApiResponse:
+        self._log_energy_fetch("month", plant_id, date)
         url = self._endpoints.energy_month_url(plant_id, date)
         return self._get(url)
 
     def get_energy_day(self, plant_id: str, date: str) -> ApiResponse:
+        self._log_energy_fetch("day", plant_id, date)
         url = self._endpoints.energy_day_url(plant_id, date)
         return self._get(url)
