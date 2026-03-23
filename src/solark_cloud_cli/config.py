@@ -44,7 +44,7 @@ class SolarkConfig(BaseSettings):
     @field_validator("output_format")
     @classmethod
     def validate_output_format(cls, v: str) -> str:
-        allowed = {"json", "csv", "table"}
+        allowed = {"json", "csv", "table", "html"}
         if v not in allowed:
             msg = f"output_format must be one of {allowed}, got '{v}'"
             raise ValueError(msg)

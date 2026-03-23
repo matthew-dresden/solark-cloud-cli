@@ -65,8 +65,9 @@ def _run_energy_command(
 
     resolved_plant_id = _resolve_plant_id(config)
 
+    plant_url = f"{config.api_url.replace('api.', 'www.')}/plants/overview/{resolved_plant_id}"
     try:
-        formatter = get_formatter(config.output_format)
+        formatter = get_formatter(config.output_format, plant_url=plant_url, username=config.username)
     except ValueError as e:
         typer.echo(f"Error: {e}", err=True)
         raise typer.Exit(code=1) from e

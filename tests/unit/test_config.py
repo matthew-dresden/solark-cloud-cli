@@ -42,6 +42,7 @@ class TestSolarkConfig:
             pytest.param("json", id="json"),
             pytest.param("csv", id="csv"),
             pytest.param("table", id="table"),
+            pytest.param("html", id="html"),
         ],
     )
     def test_accepts_valid_output_format(self, valid_format):

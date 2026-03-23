@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2026-03-23
+
+### Added
+- HTML output format (`--output-format html`) — self-contained dark-mode report with system info, SolarkCloud account link, and modern styling
+- `*.html` added to `.gitignore` to prevent committing generated reports
+
 ## [0.2.0] - 2026-03-23
 
 ### Added

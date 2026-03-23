@@ -1,6 +1,6 @@
 # solark-cloud-cli
 
-> **⚠️ WARNING: This project is currently in testing. The `main` branch is not considered stable. Only tagged releases (e.g. `0.2.0`) are intended for use. Expect breaking changes until a stable release is published.**
+> **⚠️ WARNING: This project is currently in testing. The `main` branch is not considered stable. Only tagged releases (e.g. `0.3.0`) are intended for use. Expect breaking changes until a stable release is published.**
 
 CLI tool for retrieving solar energy production data from [Sol-Ark](https://sol-ark.com/) inverter systems via the SolarkCloud API.
 
@@ -8,7 +8,7 @@ CLI tool for retrieving solar energy production data from [Sol-Ark](https://sol-
 
 - Retrieve yearly, monthly, and daily energy data from the SolarkCloud monitoring platform
 - Dollar value calculations with configurable utility rate structures (seasonal + time-of-use)
-- Output in JSON, CSV, or rich terminal table format
+- Output in JSON, CSV, rich terminal table, or dark-mode HTML report
 - `.env` file support for persistent configuration
 - Fully configurable via environment variables or CLI arguments
 - Hierarchical, self-documenting command help at every level
@@ -21,7 +21,7 @@ Requires Python 3.12+.
 ### With pipx (recommended)
 
 ```bash
-pipx install git+https://github.com/matthew-dresden/solark-cloud-cli.git@0.2.0
+pipx install git+https://github.com/matthew-dresden/solark-cloud-cli.git@0.3.0
 ```
 
 ### From source
@@ -67,7 +67,7 @@ All configuration is driven by a `.env` file, environment variables, or CLI argu
 | `SOLARK_PASSWORD` | `--password`, `-p` | SolarkCloud account password | *(required)* |
 | `SOLARK_PLANT_ID` | `--plant-id` | Plant ID (from your SolarkCloud URL) | *(required)* |
 | `SOLARK_API_URL` | | API base URL | `https://api.solarkcloud.com` |
-| `SOLARK_OUTPUT_FORMAT` | `--output-format`, `-o` | Output format: `json`, `csv`, `table` | `table` |
+| `SOLARK_OUTPUT_FORMAT` | `--output-format`, `-o` | Output format: `json`, `csv`, `table`, `html` | `table` |
 | `SOLARK_TIMEOUT` | | HTTP request timeout in seconds | `30` |
 | `SOLARK_LOG_LEVEL` | `--log-level`, `-l` | Log verbosity: `debug`, `info`, `warning`, `error` | `warning` |
 
@@ -214,6 +214,9 @@ solark energy year --date 2025 --output-format csv
 
 # CSV with values (pivoted format)
 solark energy year --date 2025 --show-value --output-format csv
+
+# HTML dark-mode report (save to file)
+solark energy year --date 2025 --show-value --output-format html > report.html
 ```
 
 ### Logging

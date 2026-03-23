@@ -23,6 +23,9 @@ htmlcov/
 .devcontainer/aws-profile-map.json
 .devcontainer/ssh-private-key
 
+# Generated reports
+*.html
+
 # OS files
 .DS_Store
 Thumbs.db
