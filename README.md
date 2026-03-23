@@ -1,6 +1,6 @@
 # solark-cloud-cli
 
-> **⚠️ WARNING: This project is currently in testing. The `main` branch is not considered stable. Only tagged releases (e.g. `0.3.0`) are intended for use. Expect breaking changes until a stable release is published.**
+> **⚠️ WARNING: This project is currently in testing. The `main` branch is not considered stable. Only tagged releases (e.g. `0.4.0`) are intended for use. Expect breaking changes until a stable release is published.**
 
 CLI tool for retrieving solar energy production data from [Sol-Ark](https://sol-ark.com/) inverter systems via the SolarkCloud API.
 
@@ -14,6 +14,26 @@ CLI tool for retrieving solar energy production data from [Sol-Ark](https://sol-
 - Hierarchical, self-documenting command help at every level
 - Structured logging with configurable verbosity
 
+## Example Output
+
+### Yearly Report with Dollar Values
+
+![Year with values](docs/screenshots/year-with-values.jpg)
+
+### Monthly Daily Breakdown with Dollar Values
+
+![Month daily with values](docs/screenshots/month-daily-with-values.jpg)
+
+### Yearly Report (Energy Only)
+
+![Year basic](docs/screenshots/year-basic.jpg)
+
+### Single Month Summary
+
+![Month summary](docs/screenshots/month-summary-with-values.jpg)
+
+> HTML example files are available in [`docs/examples/`](docs/examples/).
+
 ## Installation
 
 Requires Python 3.12+.
@@ -21,7 +41,7 @@ Requires Python 3.12+.
 ### With pipx (recommended)
 
 ```bash
-pipx install git+https://github.com/matthew-dresden/solark-cloud-cli.git@0.3.0
+pipx install git+https://github.com/matthew-dresden/solark-cloud-cli.git@0.4.0
 ```
 
 ### From source
@@ -70,6 +90,7 @@ All configuration is driven by a `.env` file, environment variables, or CLI argu
 | `SOLARK_OUTPUT_FORMAT` | `--output-format`, `-o` | Output format: `json`, `csv`, `table`, `html` | `table` |
 | `SOLARK_TIMEOUT` | | HTTP request timeout in seconds | `30` |
 | `SOLARK_LOG_LEVEL` | `--log-level`, `-l` | Log verbosity: `debug`, `info`, `warning`, `error` | `warning` |
+| `SOLARK_TIMEZONE` | | IANA timezone for HTML reports (e.g. `America/Detroit`) | OS local |
 
 ### Rate Configuration (for `--show-value`)
 

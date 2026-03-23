@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solar Energy Report — 2025 — Plant XXXXXX</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --purple: #bc8cff;
+    --yellow: #d29922;
+    --money: #3fb950;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+  }
+  .container { max-width: 1400px; margin: 0 auto; }
+  header {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+  header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    font-size: 0.875rem;
+  }
+  .meta-item { color: var(--text-dim); }
+  .meta-item strong { color: var(--text); }
+  .meta-item a { color: var(--accent); text-decoration: none; }
+  .meta-item a:hover { text-decoration: underline; }
+  .meta-item.full-width { grid-column: 1 / -1; word-break: break-all; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 0.875rem;
+  }
+  thead { background: rgba(88, 166, 255, 0.08); }
+  th {
+    padding: 0.75rem 1rem;
+    text-align: right;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  th:first-child { text-align: left; }
+  td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .ts { text-align: left; color: var(--text-dim); font-family: 'SF Mono', Consolas, monospace; }
+  .num { text-align: right; font-family: 'SF Mono', Consolas, monospace; }
+  .money { text-align: right; color: var(--money); font-family: 'SF Mono', Consolas, monospace; }
+  .total-val { color: var(--purple); font-weight: 600; }
+  .total-row { font-weight: 700; background: rgba(88, 166, 255, 0.06); }
+  tr:hover td { background: rgba(88, 166, 255, 0.04); }
+  tr.totals td { border-top: 2px solid var(--accent); border-bottom: none; }
+  footer {
+    margin-top: 1.5rem;
+    padding: 1rem 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Solar Energy Report</h1>
+    <div class="meta">
+      <div class="meta-item"><strong>Plant ID:</strong> XXXXXX</div>
+      <div class="meta-item"><strong>Period:</strong> Year</div>
+      <div class="meta-item"><strong>Date:</strong> 2025</div>
+      <div class="meta-item"><strong>Account:</strong> user@example.com</div>
+      <div class="meta-item"><strong>Generated:</strong> 2026-03-22 20:38 EDT</div>
+      <div class="meta-item full-width"><strong>SolarkCloud:</strong> <a href="https://www.solarkcloud.com/plants/overview/XXXXXX" target="_blank">https://www.solarkcloud.com/plants/overview/XXXXXX</a></div>
+    </div>
+  </header>
+  <table>
+    <thead><tr><th>Time</th><th>Load</th><th>PV</th><th>Export</th><th>Import</th><th>Charge</th><th>Discharge</th><th>Self-Used</th><th>Avoided $</th><th>Export $</th><th>Value $</th></tr></thead>
+    <tbody>
+<tr><td class="ts">2025-01</td><td class="num">2,838.9</td><td class="num">1,453.2</td><td class="num">2,197.4</td><td class="num">1,933.5</td><td class="num">571.1</td><td class="num">474.3</td><td class="num">905.4</td><td class="money">$205.89</td><td class="money">$217.54</td><td class="money total-val">$423.43</td></tr><tr><td class="ts">2025-02</td><td class="num">2,703.6</td><td class="num">1,539.9</td><td class="num">458.5</td><td class="num">1,841.0</td><td class="num">592.1</td><td class="num">488.9</td><td class="num">862.6</td><td class="money">$196.16</td><td class="money">$45.39</td><td class="money total-val">$241.55</td></tr><tr><td class="ts">2025-03</td><td class="num">2,252.4</td><td class="num">3,261.1</td><td class="num">1,397.0</td><td class="num">652.3</td><td class="num">1,027.2</td><td class="num">923.6</td><td class="num">1,600.1</td><td class="money">$363.86</td><td class="money">$138.30</td><td class="money total-val">$502.17</td></tr><tr><td class="ts">2025-04</td><td class="num">2,026.3</td><td class="num">3,841.5</td><td class="num">1,822.7</td><td class="num">309.4</td><td class="num">1,050.5</td><td class="num">911.0</td><td class="num">1,716.9</td><td class="money">$390.42</td><td class="money">$180.45</td><td class="money total-val">$570.87</td></tr><tr><td class="ts">2025-05</td><td class="num">1,843.2</td><td class="num">3,803.1</td><td class="num">1,759.0</td><td class="num">75.0</td><td class="num">975.2</td><td class="num">856.0</td><td class="num">1,768.2</td><td class="money">$402.09</td><td class="money">$174.14</td><td class="money total-val">$576.23</td></tr><tr><td class="ts">2025-06</td><td class="num">2,694.0</td><td class="num">4,368.2</td><td class="num">1,607.6</td><td class="num">214.6</td><td class="num">1,178.6</td><td class="num">1,070.6</td><td class="num">2,479.4</td><td class="money">$554.15</td><td class="money">$166.87</td><td class="money total-val">$721.01</td></tr><tr><td class="ts">2025-07</td><td class="num">3,315.3</td><td class="num">4,531.7</td><td class="num">1,373.8</td><td class="num">486.7</td><td class="num">1,287.8</td><td class="num">1,135.9</td><td class="num">2,828.6</td><td class="money">$632.19</td><td class="money">$142.60</td><td class="money total-val">$774.79</td></tr><tr><td class="ts">2025-08</td><td class="num">2,860.1</td><td class="num">4,017.3</td><td class="num">1,236.2</td><td class="num">372.8</td><td class="num">1,236.0</td><td class="num">1,108.2</td><td class="num">2,487.3</td><td class="money">$555.91</td><td class="money">$128.32</td><td class="money total-val">$684.23</td></tr><tr><td class="ts">2025-09</td><td class="num">2,326.3</td><td class="num">3,790.5</td><td class="num">1,439.2</td><td class="num">289.5</td><td class="num">1,201.4</td><td class="num">1,049.2</td><td class="num">2,036.8</td><td class="money">$455.22</td><td class="money">$149.39</td><td class="money total-val">$604.61</td></tr><tr><td class="ts">2025-10</td><td class="num">2,055.1</td><td class="num">3,371.0</td><td class="num">1,360.0</td><td class="num">350.0</td><td class="num">1,156.1</td><td class="num">1,016.3</td><td class="num">1,705.1</td><td class="money">$387.74</td><td class="money">$134.64</td><td class="money total-val">$522.38</td></tr><tr><td class="ts">2025-11</td><td class="num">1,818.1</td><td class="num">1,743.2</td><td class="num">602.8</td><td class="num">866.9</td><td class="num">701.6</td><td class="num">632.7</td><td class="num">951.2</td><td class="money">$216.30</td><td class="money">$59.68</td><td class="money total-val">$275.98</td></tr><tr><td class="ts">2025-12</td><td class="num">2,742.9</td><td class="num">978.2</td><td class="num">88.2</td><td class="num">2,043.7</td><td class="num">463.1</td><td class="num">378.0</td><td class="num">699.2</td><td class="money">$159.00</td><td class="money">$8.73</td><td class="money total-val">$167.73</td></tr><tr class="totals"><td class="ts total-row">TOTAL</td><td class="num total-row">29,476.2</td><td class="num total-row">36,698.9</td><td class="num total-row">15,342.4</td><td class="num total-row">9,435.4</td><td class="num total-row">11,440.7</td><td class="num total-row">10,044.7</td><td class="num total-row">20,040.8</td><td class="money total-row">$4,518.93</td><td class="money total-row">$1,546.05</td><td class="money total-row total-val">$6,064.98</td></tr>
+    </tbody>
+  </table>
+  <footer>
+    <span>Generated by solark-cloud-cli v0.3.0</span>
+    <span>Data source: <a href="https://www.solarkcloud.com/plants/overview/XXXXXX" target="_blank">SolarkCloud</a></span>
+  </footer>
+</div>
+</body>
+</html>

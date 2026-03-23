@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2026-03-23
+
+### Added
+- `SOLARK_TIMEZONE` env var — set IANA timezone for HTML report timestamps (e.g. `America/Detroit`), defaults to OS local timezone
+- Example HTML reports in `docs/examples/` (obfuscated plant ID and account)
+- Screenshot previews in `docs/screenshots/` and README
+- Four example report types: year with values, year basic, month summary, month daily breakdown
+
+### Changed
+- HTML report "Generated" timestamp now uses OS local timezone instead of UTC
+
 ## [0.3.0] - 2026-03-23
 
 ### Added

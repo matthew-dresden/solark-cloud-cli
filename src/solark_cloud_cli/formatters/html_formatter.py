@@ -1,5 +1,7 @@
 import html
+import os
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 from solark_cloud_cli import __version__
 from solark_cloud_cli.models.energy import EnergyReport
@@ -75,7 +77,10 @@ class HtmlFormatter:
             header_cells.extend(["<th>Self-Used</th>", "<th>Avoided $</th>", "<th>Export $</th>", "<th>Value $</th>"])
 
         period_display = report.period.replace("_", " ").title()
-        generated = datetime.now(tz=timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        tz_name = os.environ.get("SOLARK_TIMEZONE")
+        tz = ZoneInfo(tz_name) if tz_name else datetime.now(tz=timezone.utc).astimezone().tzinfo
+        now = datetime.now(tz=tz)
+        generated = now.strftime("%Y-%m-%d %H:%M %Z")
         plant_link = f'<a href="{html.escape(self._plant_url)}" target="_blank">{html.escape(self._plant_url)}</a>'
         account_display = html.escape(self._username) if self._username else "—"
 
@@ -130,6 +135,7 @@ class HtmlFormatter:
   .meta-item strong {{ color: var(--text); }}
   .meta-item a {{ color: var(--accent); text-decoration: none; }}
   .meta-item a:hover {{ text-decoration: underline; }}
+  .meta-item.full-width {{ grid-column: 1 / -1; word-break: break-all; }}
   table {{
     width: 100%;
     border-collapse: collapse;
@@ -186,8 +192,8 @@ class HtmlFormatter:
       <div class="meta-item"><strong>Period:</strong> {html.escape(period_display)}</div>
       <div class="meta-item"><strong>Date:</strong> {html.escape(report.date)}</div>
       <div class="meta-item"><strong>Account:</strong> {account_display}</div>
-      <div class="meta-item"><strong>SolarkCloud:</strong> {plant_link}</div>
       <div class="meta-item"><strong>Generated:</strong> {generated}</div>
+      <div class="meta-item full-width"><strong>SolarkCloud:</strong> {plant_link}</div>
     </div>
   </header>
   <table>

@@ -25,6 +25,7 @@ htmlcov/
 
 # Generated reports
 *.html
+!docs/examples/*.html
 
 # OS files
 .DS_Store

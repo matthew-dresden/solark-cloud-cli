@@ -15,6 +15,7 @@ class SolarkConfig(BaseSettings):
     api_url: str = "https://api.solarkcloud.com"
     output_format: str = "table"
     timeout: int = 30
+    timezone: str | None = None  # IANA timezone (e.g. "America/Detroit"), defaults to OS local
 
     # Rate configuration — season boundaries (MM-DD format)
     rate_summer_start: str = "06-01"
