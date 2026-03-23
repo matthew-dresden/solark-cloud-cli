@@ -1,6 +1,6 @@
 # solark-cloud-cli
 
-> **⚠️ WARNING: This project is currently in testing. The `main` branch is not considered stable. Only tagged releases (e.g. `v0.1.0`) are intended for use. Expect breaking changes until a stable release is published.**
+> **⚠️ WARNING: This project is currently in testing. The `main` branch is not considered stable. Only tagged releases (e.g. `0.1.0`) are intended for use. Expect breaking changes until a stable release is published.**
 
 CLI tool for retrieving solar energy production data from [Sol-Ark](https://sol-ark.com/) inverter systems via the SolarkCloud API.
 
@@ -21,7 +21,7 @@ Requires Python 3.12+.
 ### With pipx (recommended)
 
 ```bash
-pipx install git+https://github.com/matthew-dresden/solark-cloud-cli.git@v0.1.0
+pipx install git+https://github.com/matthew-dresden/solark-cloud-cli.git@0.1.0
 ```
 
 ### From source

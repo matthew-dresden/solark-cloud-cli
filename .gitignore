@@ -20,6 +20,8 @@ htmlcov/
 
 # Environment
 .env
+.devcontainer/aws-profile-map.json
+.devcontainer/ssh-private-key
 
 # OS files
 .DS_Store
